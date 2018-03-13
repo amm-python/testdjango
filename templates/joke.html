@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    joke
+{% endblock %}
+
+{% block content %}
+    <p id="info" style="display: block">精彩5s后即将呈现,请稍候...amm</p>
+    <ul id="content" style="display: none">
+        {% for item in list %}
+            <li>
+                <p>{{ item.content|safe }}</p>
+                <br>
+                <img src="http://image.haha.mx/{{ item.pic.path }}middle/{{ item.pic.name }}" width="100%" height="30%">
+            </li>
+        {% endfor %}
+    </ul>
+
+    <script>
+        function startTimer() {
+            setTimeout(function () {
+                count--;
+                if(count==0){
+                    var info_elm = document.getElementById("info");
+                    info_elm.style.display = 'none';
+                    var content_elm = document.getElementById("content");
+                    content_elm.style.display = 'block'
+                }else {
+                      var info_elm = document.getElementById("info");
+                      info_elm.innerHTML='精彩'+count+'s后即将呈现,请稍候...'
+                }
+                startTimer();
+            }, 1000)
+        }
+        var count = 5;
+        startTimer();
+    </script>
+{% endblock %}
+
+
